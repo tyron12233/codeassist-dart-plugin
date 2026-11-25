@@ -1,7 +1,7 @@
 # The on-device Dart SDK
 
 `fetch-dart-android.sh` stages a Dart SDK that **runs on an Android device**, for the Dart plugin
-(`samples/dart-plugin`), one ABI per run (`ABI=arm64-v8a|armeabi-v7a|x86_64`, default arm64-v8a). Run it
+(this repository), one ABI per run (`ABI=arm64-v8a|armeabi-v7a|x86_64`, default arm64-v8a). Run it
 before building the plugin, once for each ABI the plugin should support; the plugin build packages whatever it
 left in `build/out`, and builds an APK with no SDK (which says so at runtime) when it finds nothing there.
 

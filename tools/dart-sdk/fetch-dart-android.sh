@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Stage a Dart SDK that RUNS ON an Android device, for the Dart plugin (samples/dart-plugin): one ABI per run
+# Stage a Dart SDK that RUNS ON an Android device, for the Dart plugin (this repository): one ABI per run
 # (arm64-v8a, armeabi-v7a or x86_64).
 #
 # Google publishes no Android build of the Dart SDK. Termux does: its `dart` package is the upstream SDK

@@ -1,4 +1,5 @@
-rootProject.name = "codeassist-dart-plugin"
+// The APK file names come from this (`dart-plugin-<abi>-release.apk`), which the release workflow expects.
+rootProject.name = "dart-plugin"
 
 pluginManagement {
     repositories {
