@@ -1,7 +1,7 @@
 name: Dart plugin release
 
-# Builds the Dart plugin (samples/dart-plugin) as one release-signed APK per ABI and attaches them to a CodeAssist
-# release as CodeAssist-Dart-Plugin-<version>-<abi>.apk. apk.yml only builds the IDE.
+# Builds the Dart plugin as one release-signed APK per ABI and attaches them to a release
+# of this repository as CodeAssist-Dart-Plugin-<version>-<abi>.apk.
 #
 # The plugin carries a Dart SDK and Flutter that run ON the device, and neither is in the repository, so:
 #   1. sdk:     tools/dart-sdk/fetch-dart-android.sh once per ABI (downloads Termux's Dart package for it)
@@ -198,7 +198,7 @@ jobs:
           test -f tools/dart-sdk/build/out/jniLibs/arm64-v8a/libdartvm.so
 
       - name: Run the plugin's unit tests
-        run: ./gradlew :samples:dart-plugin:testDebugUnitTest --console=plain --stacktrace
+        run: ./gradlew :testDebugUnitTest --console=plain --stacktrace
 
       # download-artifact drops the executable bit; the plugin marks its jniLibs executable on the device anyway.
       - name: Restore gen_snapshot's executable bit
@@ -216,17 +216,17 @@ jobs:
           export RELEASE_STORE_FILE="$RUNNER_TEMP/upload.jks"
           echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > "$RELEASE_STORE_FILE"
           trap 'rm -f "$RELEASE_STORE_FILE"' EXIT
-          ./gradlew :samples:dart-plugin:assembleRelease --console=plain --stacktrace
+          ./gradlew :assembleRelease --console=plain --stacktrace
 
       - name: Check and name the APKs
         id: apks
         run: |
           apksigner="$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner"
-          version="$(sed -n 's/^version = "\(.*\)"/\1/p' samples/dart-plugin/src/main/res/raw/codeassist_plugin.toml | head -1)"
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' src/main/res/raw/codeassist_plugin.toml | head -1)"
           [[ -n "$version" ]] || { echo "no version in codeassist_plugin.toml" >&2; exit 1; }
           mkdir -p dist
           abis=""
-          for apk in samples/dart-plugin/build/outputs/apk/release/dart-plugin-*-release.apk; do
+          for apk in build/outputs/apk/release/dart-plugin-*-release.apk; do
             abi="$(basename "$apk")"; abi="${abi#dart-plugin-}"; abi="${abi%-release.apk}"
             "$apksigner" verify "$apk"
             # Release mode has to be inside: the engine, gen_snapshot and the product platform.

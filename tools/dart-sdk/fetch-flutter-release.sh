@@ -26,7 +26,7 @@ ENGINE="89c39edfdfae2949f6806e4a315c0c08522238b7"
 
 MAVEN="https://storage.googleapis.com/download.flutter.io/io/flutter"
 INFRA="https://storage.googleapis.com/flutter_infra_release/flutter/$ENGINE"
-GEN_SNAPSHOT_RELEASE="${GEN_SNAPSHOT_RELEASE:-https://github.com/tyron12233/CodeAssist/releases/download/dart-gen-snapshot-$DART_VERSION}"
+GEN_SNAPSHOT_RELEASE="${GEN_SNAPSHOT_RELEASE:-https://github.com/tyron12233/codeassist-dart-plugin/releases/download/dart-gen-snapshot-$DART_VERSION}"
 
 PRODUCT_SDK_SHA256="22a67cf5f4922dce11e747b91f9c504ab6f92aef5df5fa0276c30356a9e64f5a"
 
