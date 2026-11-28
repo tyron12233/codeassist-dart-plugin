@@ -54,7 +54,7 @@ esac
 DEB_SHA256="${DEB_SHA256:-$PINNED_SHA256}"
 # Termux serves only its latest Dart, so a pinned version disappears from its pool when Termux moves on (3.13.7 did
 # when 3.14.1 landed). Our mirror, the dart-sdk-<version> prerelease, is tried first, then Termux. The checksum is
-# what makes either one acceptable. Only aarch64 was mirrored for 3.13.7: arm and x86_64 were gone by then.
+# what makes either one acceptable. All three 3.13.7 debs are mirrored (arm and x86_64 recovered from Termux CI).
 MIRROR_URL="https://github.com/tyron12233/codeassist-dart-plugin/releases/download/dart-sdk-${DART_VERSION}/dart_${DART_VERSION}_${DEB_ARCH}.deb"
 TERMUX_URL="https://packages.termux.dev/apt/termux-main/pool/main/d/dart/dart_${DART_VERSION}_${DEB_ARCH}.deb"
 DEB_URLS="${DEB_URL:-$MIRROR_URL $TERMUX_URL}"
